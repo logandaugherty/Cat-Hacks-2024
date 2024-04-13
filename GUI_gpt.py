@@ -11,6 +11,7 @@ intervals = []
 
 begin_time = time.time()
 
+
 def on_click(event):
     global counter, start_time
     counter += 1
@@ -23,6 +24,10 @@ def on_click(event):
     start_time = time.time()
     intervals.append(elapsed_time)
     print(f"Elapsed time: {elapsed_time:.2f} seconds")
+
+    photo = tk.PhotoImage(file="heart_beat.gif")
+    label = tk.Label(image=photo)
+    label.pack()
 
 
 def on_space(event):
