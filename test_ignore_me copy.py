@@ -17,8 +17,7 @@ class ImageSwitcherApp:
 
         # Create image labels
         for image in self.images:
-            # image = image.resize((480, 800), Image.ANTIALIAS)
-            image = image.resize((480, 800))
+            image = image.resize((480, 800), Image.ANTIALIAS)
             photo = ImageTk.PhotoImage(image)
             label = tk.Label(master, image=photo)
             label.image = photo  # Keep a reference to prevent garbage collection
