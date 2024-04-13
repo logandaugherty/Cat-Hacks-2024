@@ -1,9 +1,12 @@
 import tkinter as tk
+import pandas as pd
+
 import time
 
 # Initialize variables
 space_pressed = False
 start_time = time.time()
+intervals = []
 
 def on_key_press(event):
     global space_pressed, start_time
@@ -14,10 +17,12 @@ def on_key_press(event):
         elapsed_time = end_time - start_time
 
         start_time = time.time()
+        intervals.append(elapsed_time)
         print(f"Elapsed time: {elapsed_time:.2f} seconds")
 
 def display_array():
-    print("Array: []")
+    df = pd.DataFrame(intervals).T
+    df.to_excel(excel_writer="C:\\Unity Projects\\Cat-Hacks-2024\\Data.xlsx")
 
 # Create the root window
 root = tk.Tk()
