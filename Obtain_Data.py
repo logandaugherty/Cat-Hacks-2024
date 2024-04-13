@@ -22,7 +22,7 @@ def on_key_press(event):
 
 def display_array():
     df = pd.DataFrame(intervals).T
-    df.to_excel(excel_writer="C:\\Unity Projects\\Cat-Hacks-2024\\Data.xlsx")
+    df.to_excel(excel_writer="Data.xlsx")
 
 # Create the root window
 root = tk.Tk()
