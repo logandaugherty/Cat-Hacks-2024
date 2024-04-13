@@ -81,14 +81,21 @@ def determine_heart_cond(age, heartType, BPM):
                 healthy = True
             else:                
                 healthy = False
+
+    if (healthy == True):
+        return("\nCongrats! You have a\n healthy heart rate.")
+    else:
+        return("\nYour heart rate is\n abnormal for your\n age. Please continue\n recording data and\n consult a medical\n professional\n")
+
+
     return healthy
 
 # Function to provide health advice based on heart rate
-def advice(healthy):
-    if (healthy == True):
-        print("\nCongrats! You have a healthy heart rate.")
-    else:
-        print("\nYour heart rate is abnormal for your age.\nPlease continue recording data and consult a medical professional")
+# def advice(healthy):
+#     if (healthy == True):
+#         print("\nCongrats! You have a healthy heart rate.")
+#     else:
+#         print("\nYour heart rate is abnormal for your age.\nPlease continue recording data and consult a medical professional")
 
 # # Test heart rate and provide advice
 # healthy = determine_heart_cond(age, heartType, BPM)

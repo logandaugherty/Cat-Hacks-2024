@@ -95,7 +95,15 @@ class ImageSwitcherApp:
                 print("Collected data:")
                 print("Age:", self.data["age"])
                 print("Type:", self.data["type"])
-                BPM_Monitor.determine_heart_cond(self.data["age"], self.data["type"], newBPM)
+                resultText = BPM_Monitor.determine_heart_cond(self.data["age"], self.data["type"], newBPM)
+                self.dispBPM = tk.Label(text=newBPM, font=("Arial", 20, "bold"))
+                self.dispBPM.place(x=220, y=150,)
+                self.dispBPM.configure(bg="white")
+
+                self.finalResult = tk.Label(text=resultText, font=("Arial", 20, "bold"))
+                self.finalResult.place(x=50,y=250)
+                self.finalResult.configure(bg="white")
+
 
         else:
             # Reset current image index to cycle through images again
