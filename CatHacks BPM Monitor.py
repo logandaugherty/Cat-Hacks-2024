@@ -11,10 +11,13 @@ age = int(input("Enter your age: "))
 while (age < 10):
     age = int(input("\nYou are too young to use this app!\nPlease enter a valid age: "))
 
-heartType = input("Are you recording your resting and moving heart rate? (Please type \"R\" for resting and \"M\" for moving). ")
+# input validation for heartType (no longer needed because of drop down menu)
+# heartType = input("Are you recording your resting and moving heart rate? (Please type \"R\" for resting and \"M\" for moving). ")
 # while ((heartType != "R") and (heartType != "r") and (heartType != "M") and (heartType != "m")):
     # heartType = input("Invalid input. Please enter \"R\" for resting or \"M\" for moving. ")
 
+# test data
+heartType = "Resting"
 # Replace with actual BPM data
 BPM = 100
 
