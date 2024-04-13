@@ -17,7 +17,8 @@ class ImageSwitcherApp:
 
         # Create image labels
         for image in self.images:
-            image = image.resize((480, 800), Image.ANTIALIAS)
+            # image = image.resize((480, 800), Image.ANTIALIAS)
+            image = image.resize((480, 800))
             photo = ImageTk.PhotoImage(image)
             label = tk.Label(master, image=photo)
             label.image = photo  # Keep a reference to prevent garbage collection
@@ -31,14 +32,14 @@ class ImageSwitcherApp:
         self.age_label = tk.Label(master, text="Age:")
         self.age_entry = tk.Entry(master)
 
-        self.gender_label = tk.Label(master, text="Gender (M/F):")
-        self.gender_entry = tk.Entry(master)
+        self.type_label = tk.Label(master, text="Gender (M/F):")
+        self.type_entry = tk.Entry(master)
 
         # Bind space bar key to switch image
         master.bind("<space>", self.switch_image)
 
         # Dictionary to store entered data
-        self.data = {"age": None, "gender": None}
+        self.data = {"age": None, "type": None}
 
     def switch_image(self, event):
         print("Switching image...")  # Debug statement
@@ -47,7 +48,7 @@ class ImageSwitcherApp:
             # Save entered data before switching the image
             if self.current_image_index == 1:
                 self.data["age"] = self.age_entry.get()
-                self.data["gender"] = self.gender_entry.get()
+                self.data["type"] = self.type_entry.get()
 
             # Increment current image index
             self.current_image_index += 1
@@ -60,10 +61,10 @@ class ImageSwitcherApp:
             # Show entry widgets only on the second image
             if self.current_image_index == 1:
                 self.age_entry.place(x=50, y=220)
-                self.gender_entry.place(x=220, y=220)
+                self.type_entry.place(x=220, y=220)
             else:  # Hide entry widgets on other images
                 self.age_entry.place_forget()
-                self.gender_entry.place_forget()
+                self.type_entry.place_forget()
         else:
             # Reset current image index to cycle through images again
             self.current_image_index = 0
@@ -79,7 +80,7 @@ class ImageSwitcherApp:
                 # Print collected data
                 print("Collected data:")
                 print("Age:", self.data["age"])
-                print("Gender:", self.data["gender"])
+                print("Heart Type:", self.data["type"])
 
 def main():
     root = tk.Tk()
