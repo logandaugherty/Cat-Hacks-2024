@@ -37,7 +37,8 @@ def plot_graph(root, intervals):
     ax.plot(t, y)
     ax.set_xlabel("Time [s]")
     ax.set_ylabel("f(t)")
-    ax.set_title("BPM over time")
+    ax.set_title("Beat intervals over time")
+    ax.set_xbound(0.05,1.5)
 
     # Create a canvas for the figure
     canvas = FigureCanvasTkAgg(fig, master=root)
