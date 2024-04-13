@@ -12,21 +12,21 @@ while (age < 10):
     age = int(input("\nYou are too young to use this app!\nPlease enter a valid age: "))
 
 heartType = input("Are you recording your resting and moving heart rate? (Please type \"R\" for resting and \"M\" for moving). ")
-while ((heartType != "R") and (heartType != "r") and (heartType != "M") and (heartType != "m")):
-    heartType = input("Invalid input. Please enter \"R\" for resting or \"M\" for moving. ")
+# while ((heartType != "R") and (heartType != "r") and (heartType != "M") and (heartType != "m")):
+    # heartType = input("Invalid input. Please enter \"R\" for resting or \"M\" for moving. ")
 
 # Replace with actual BPM data
 BPM = 100
 
 # Function to determine if heart rate is healthy or not
 def determine_heart_cond(age, heartType, BPM):
-    if (heartType == "R" or heartType == "r"):
+    if (heartType == "Resting"):
         if (age >= 10):
             if (BPM  >= 60 and BPM <= 100): 
                 healthy = True
             else:
                 healthy = False
-    elif (heartType == "M" or heartType == "m"):
+    elif (heartType == "Moving"):
         if (age >= 20):
             if (BPM  >= 100 and BPM <= 170):
                 healthy = True
@@ -78,7 +78,6 @@ def determine_heart_cond(age, heartType, BPM):
             else:                
                 healthy = False
     return healthy
-
 
 # Function to provide health advice based on heart rate
 def advice(healthy):
