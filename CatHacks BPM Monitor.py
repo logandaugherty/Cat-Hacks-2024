@@ -1,3 +1,4 @@
+# Display welcome messgae to user
 print("Hello! Welcome to your personal EKG monitor.")
 print("Here, you will be recording your pulse and finding out your BPM.")
 print("To start, enter your age and then enter if you are recording your resting or moving heart rate.")
@@ -11,6 +12,8 @@ while (age < 10):
     age = int(input("\nYou are too young to use this app!\nPlease enter a valid age: "))
 
 heartType = input("Are you recording your resting and moving heart rate? (Please type \"R\" for resting and \"M\" for moving). ")
+while ((heartType != "R") and (heartType != "r") and (heartType != "M") and (heartType != "m")):
+    heartType = input("Invalid input. Please enter \"R\" for resting or \"M\" for moving. ")
 
 # Replace with actual BPM data
 BPM = 100
