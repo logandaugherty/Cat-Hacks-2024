@@ -1,8 +1,8 @@
 import random
 
-START_NULL_TIME_S = 3
+START_NULL_TIME_S = 1
 END_NULL_TIME_S = 1
-TOTAL_TIME = 20
+TOTAL_TIME = 3
 duration_time = TOTAL_TIME-END_NULL_TIME_S-START_NULL_TIME_S
 
 def get_start_null_time():
@@ -19,8 +19,12 @@ def get_total_time():
 
 def filter(intervals):
     new_intervals = []
+    total_time = 0
 
-    if sum(intervals) < duration_time:
+    for time in intervals:
+        total_time += time
+
+    if total_time < duration_time:
         print('Total Time is not long enough!\n Total Time: {0:0.2f}'.format(total_time))
         return
  
@@ -42,14 +46,15 @@ def calculateBPM(intervals):
     return round(BPS)
 
 #  Test Data
-test_data = []
-for i in range(100):
-    test_data.append(random.randrange(900, 1100)/1000.0)
-# print(test_data)
+if __name__ == "__main__":
+    test_data = []
+    for i in range(100):
+        test_data.append(random.randrange(900, 1100)/1000.0)
+    print(test_data)
 
-filtered_data = filter(test_data)
-print(sum(filtered_data))
-print(filtered_data)
+    filtered_data = filter(test_data)
+    print(sum(filtered_data))
+    print(filtered_data)
 
-BPS = calculateBPM(filtered_data)
-print(BPS)
+    BPS = calculateBPM(filtered_data)
+    print(BPS)

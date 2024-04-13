@@ -4,98 +4,113 @@ from PIL import ImageTk, Image
 import time
 import Manage_Data
 
-# Initialize variables
-counter = 0
-start_time = time.time()
-intervals = []
-first_click = True
+class BPMRecorderApp:
+    def __init__(self, master):
+        self.master = master
+        # Initialize variables
+        self.counter = 0
+        self.start_time = time.time()
+        self.intervals = []
+        self.first_click = True
+        self.completed = False
 
-def start_calibrate():
-    time_title_label.config(text=f"~ Calibrating ~\n")
-    count_down(Manage_Data.get_start_null_time())
-    root.after(Manage_Data.get_start_null_time()*1000+1, start_collect)
+        # Add background image (replace with your actual background image)
+        self.background_img = Image.open("background.png")
+        self.background_img = self.background_img.resize((480, 800), Image.LANCZOS)
+        self.background_photo = ImageTk.PhotoImage(self.background_img)
+        self.background_label = tk.Label(master, image=self.background_photo)
+        self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
 
-def start_collect():
-    time_title_label.place_forget()
-    time_left = Manage_Data.get_read_duration_time() + Manage_Data.get_end_null_time() 
-    count_down(time_left)
-    root.after(time_left*1000+1, end_measure)
+        # Load GIF frames
+        self.frameCnt = 16
+        self.frames = [PhotoImage(file='heart_Beat2.gif', format='gif -index %i' % i) for i in range(self.frameCnt)]
 
-def end_measure():
-    print('End!')
-    filtered_data = Manage_Data.filter(intervals)
-    BPM = Manage_Data.calculateBPM(filtered_data)
-    print(BPM)
+        # Create a label for displaying the animation
+        self.label = Label(master, bg='white')
+        self.label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        self.label.bind('<Button-1>', self.on_click)  # Bind left mouse button click event
 
-def count_down(time_left):
-    if time_left > 0:
-        # Update the label with the remaining time
-        time_label.config(text=f"{time_left}")
-        time_label.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
-        root.after(1000, count_down, time_left - 1)
-    else:
-        # Countdown completed, display a message
-        time_label.place_forget()
+        # Create a label for displaying the countdown timer
+        self.time_title_label = tk.Label(master, text="", font=("Helvetica", 25), bg='white')
+        self.time_title_label.place(relx=0.5, rely=0.75, anchor=tk.CENTER)
+        self.time_label = tk.Label(master, text="", font=("Helvetica", 40), bg='white')
+        self.time_label.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
 
-def on_click(event):
-    global start_time, first_click
+        self.update(14)
 
-    if first_click:
-        first_click = False
-        start_calibrate()
+    def hide(self):
+        self.label.place_forget()
+        self.time_label.place_forget()
+        # self.background_img.place_forget()
+        self.background_label.place_forget()
+        # self.background_photo.place_forget()
 
-    # Calculate elapsed time since last click
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    start_time = time.time()
-    intervals.append(elapsed_time)
-    print(f"Elapsed time: {elapsed_time:.2f} seconds")
+    def start_calibrate(self):
+        self.time_title_label.config(text=f"~ Calibrating ~\n")
+        self.count_down(Manage_Data.get_start_null_time())
+        self.master.after(Manage_Data.get_start_null_time()*1000+1, self.start_collect)
 
-    # Start the animation
-    update(0)
+    def start_collect(self):
+        self.time_title_label.place_forget()
+        time_left = Manage_Data.get_read_duration_time() + Manage_Data.get_end_null_time() 
+        self.count_down(time_left)
+        self.master.after(time_left*1000+1, self.end_measure)
 
-def on_space(event):
-    # Trigger on_click function when spacebar is pressed
-    on_click(event)
+    def end_measure(self):
+        filtered_data = Manage_Data.filter(self.intervals)
+        BPM = Manage_Data.calculateBPM(filtered_data)
+        self.completed = True
+        print(BPM)
 
-# Create the root window
-root = tk.Tk()
-root.title("Heart Counter")
-root.geometry("400x770")
-root.resizable(False, False)
+    def count_down(self,time_left):
+        if time_left > 0:
+            # Update the label with the remaining time
+            self.time_label.config(text=f"{time_left}")
+            self.time_label.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
+            self.master.after(1000, self.count_down, time_left - 1)
+        else:
+            # Countdown completed, display a message
+            self.time_label.place_forget()
 
-# Add background image (you can replace this with your actual background image)
-background_img = Image.open("background.png")
-background_img = background_img.resize((480, 800), Image.LANCZOS)
-background_photo = ImageTk.PhotoImage(background_img)
-background_label = tk.Label(root, image=background_photo)
-background_label.place(x=0, y=0, relwidth=1, relheight=1)
+    def on_click(self,event):
 
-# Load GIF frames
-frameCnt = 16
-frames = [PhotoImage(file='heart_Beat2.gif', format='gif -index %i' % i) for i in range(frameCnt)]
+        if self.first_click:
+            self.first_click = False
+            self.start_calibrate()
 
-def update(ind):
-    # Update animation frame
-    frame = frames[ind]
-    ind += 1
-    if ind < frameCnt:
-        label.configure(image=frame)
-        root.after(10, update, ind)
+        # Calculate elapsed time since last click
+        end_time = time.time()
+        elapsed_time = end_time - self.start_time
+        self.start_time = time.time()
+        self.intervals.append(elapsed_time)
+        print(f"Elapsed time: {elapsed_time:.2f} seconds")
 
-# Create a label for displaying the animation
-label = Label(root, bg='white')
-label.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-label.bind('<Button-1>', on_click)  # Bind left mouse button click event
+        # Start the animation
+        self.update(0)
 
-# Create a label for displaying the countdown timer
-time_title_label = tk.Label(root, text="", font=("Helvetica", 25),bg = 'white')
-time_title_label.place(relx=0.5, rely=0.75, anchor=tk.CENTER)
-time_label = tk.Label(root, text="", font=("Helvetica", 40),bg = 'white')
-time_label.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
+    def on_space(self,event):
+        # Trigger on_click function when spacebar is pressed
+        self.on_click(event)
 
-root.bind('<space>', on_space)
+    def update(self,ind):
+        # Update animation frame
+        frame = self.frames[ind]
+        ind += 1
+        if ind < self.frameCnt:
+            self.label.configure(image=frame)
+            self.master.after(10, self.update, ind)
 
-update(14)
+def main():
+    # Create the root window
+    root = tk.Tk()
+    root.title("Heart Counter")
+    root.geometry("400x770")
+    root.resizable(False, False)
+    app = BPMRecorderApp(root)
+    
+    root.bind('<space>', app.on_space)
 
-root.mainloop()
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()

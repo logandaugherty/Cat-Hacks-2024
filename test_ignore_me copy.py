@@ -1,5 +1,6 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+from GUI_3p import BPMRecorderApp
 
 class ImageSwitcherApp:
     def __init__(self, master):
@@ -17,7 +18,7 @@ class ImageSwitcherApp:
 
         # Create image labels
         for image in self.images:
-            image = image.resize((480, 800), Image.ANTIALIAS)
+            image = image.resize((480, 800))
             photo = ImageTk.PhotoImage(image)
             label = tk.Label(master, image=photo)
             label.image = photo  # Keep a reference to prevent garbage collection
@@ -35,15 +36,35 @@ class ImageSwitcherApp:
         self.type_var.set("Moving")  # Set default value
         self.type_menu = tk.OptionMenu(master, self.type_var, "Moving", "Resting")
 
+        self.bpmAppInitialized = False
+
         # Bind space bar key to switch image
-        master.bind("<space>", self.switch_image)
+        master.bind("<space>", self.press_input)
 
         # Dictionary to store entered data
         self.data = {"age": None, "type": None}
 
+    def press_input(self,event):
+
+        if self.current_image_index == 1 and not self.bpmAppInitialized:
+            self.bpmAppInitialized = True
+            self.bpmApp = BPMRecorderApp(self.master)
+
+        elif self.current_image_index == 1 and self.bpmApp.completed:
+            self.switch_image(event)
+            self.bpmApp.hide()
+            self.bpmAppInitialized = False
+
+        elif self.current_image_index == 1:
+            self.bpmApp.on_click(event)
+        else:
+            self.switch_image(event)
+
+
     def switch_image(self, event):
         print("Switching image...")  # Debug statement
         print("Current image index before:", self.current_image_index)  # Debug statement
+
         if self.current_image_index < len(self.images) - 1:
             # Save entered data before switching the image
             if self.current_image_index == 1:
@@ -65,6 +86,7 @@ class ImageSwitcherApp:
             else:  # Hide entry widgets on other images
                 self.age_entry.place_forget()
                 self.type_menu.place_forget()
+
         else:
             # Reset current image index to cycle through images again
             self.current_image_index = 0
