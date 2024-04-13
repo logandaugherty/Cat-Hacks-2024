@@ -2,6 +2,8 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from GUI_3p import BPMRecorderApp
 import BPM_Monitor
+import Manage_Data
+import graphing_test
 
 class ImageSwitcherApp:
     def __init__(self, master):
@@ -91,6 +93,12 @@ class ImageSwitcherApp:
             print("Current image index after:", self.current_image_index)  # Debug statement
             if self.current_image_index == 2:  # Change the condition here
                 newBPM = self.bpmApp.getBPM()
+
+                self.graph = tk.Frame()
+                self.graph.place(relx=0.5, rely=0.75,relheight=0.25, relwidth=0.8, anchor=tk.CENTER)
+                graphing_test.plot_graph(self.graph, Manage_Data.filter(self.bpmApp.intervals))
+
+
                 # Print collected data
                 print("Collected data:")
                 print("Age:", self.data["age"])
