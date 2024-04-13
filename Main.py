@@ -125,7 +125,7 @@ class ImageSwitcherApp:
 
 def main():
     root = tk.Tk()
-    root.title("Heart Counter")
+    root.title("Pulse Check")
     root.geometry("400x770")
     root.resizable(False, False)  # Set window size fixed (not resizable)
     app = ImageSwitcherApp(root)
