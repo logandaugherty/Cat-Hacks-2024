@@ -12,7 +12,7 @@ BPM = 100
 
 if (heartType == "R"):
     if (age >= 20):
-        if (BPM  >= 60 or BPM <= 100):
+        if (BPM  >= 60 or BPM <= 100): 
             print("Congrats! You have a healthy heart rate.")
 elif (heartType == "M"):
     if (age >= 20):
