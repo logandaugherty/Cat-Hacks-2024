@@ -11,7 +11,7 @@ def get_start_null_time():
 def get_end_null_time():
     return END_NULL_TIME_S
 
-def get_read_duration_null_time():
+def get_read_duration_time():
     return duration_time
 
 def get_total_time():
