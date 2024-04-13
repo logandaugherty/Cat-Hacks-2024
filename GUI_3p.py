@@ -15,7 +15,7 @@ class BPMRecorderApp:
         self.completed = False
 
         # Add background image (replace with your actual background image)
-        self.background_img = Image.open("background.png")
+        self.background_img = Image.open("4.png")
         self.background_img = self.background_img.resize((480, 800), Image.LANCZOS)
         self.background_photo = ImageTk.PhotoImage(self.background_img)
         self.background_label = tk.Label(master, image=self.background_photo)
@@ -99,6 +99,12 @@ class BPMRecorderApp:
         if ind < self.frameCnt:
             self.label.configure(image=frame)
             self.master.after(10, self.update, ind)
+
+    def getBPM(self):
+        filtered_data = Manage_Data.filter(self.intervals)
+        BPM = Manage_Data.calculateBPM(filtered_data)
+        return BPM
+
 
 def main():
     # Create the root window

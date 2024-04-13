@@ -1,15 +1,15 @@
 # Display welcome messgae to user
-print("Hello! Welcome to your personal EKG monitor.")
-print("Here, you will be recording your pulse and finding out your BPM.")
-print("To start, enter your age and then enter if you are recording your resting or moving heart rate.")
-print("Then, feel your pulse with one hand and start pressing the spacebar everytime you feel a pulse.")
-print("Enjoy!\n")
+#print("Hello! Welcome to your personal EKG monitor.")
+#print("Here, you will be recording your pulse and finding out your BPM.")
+#print("To start, enter your age and then enter if you are recording your resting or moving heart rate.")
+#print("Then, feel your pulse with one hand and start pressing the spacebar everytime you feel a pulse.")
+#print("Enjoy!\n")
 
 # Testing Code
-age = int(input("Enter your age: "))
+#age = int(input("Enter your age: "))
 
-while (age < 10):
-    age = int(input("\nYou are too young to use this app!\nPlease enter a valid age: "))
+#while (age < 10):
+#    age = int(input("\nYou are too young to use this app!\nPlease enter a valid age: "))
 
 # input validation for heartType (no longer needed because of drop down menu)
 # heartType = input("Are you recording your resting and moving heart rate? (Please type \"R\" for resting and \"M\" for moving). ")
@@ -17,12 +17,13 @@ while (age < 10):
     # heartType = input("Invalid input. Please enter \"R\" for resting or \"M\" for moving. ")
 
 # test data
-heartType = "Resting"
+#heartType = "Resting"
 # Replace with actual BPM data
-BPM = 100
+#BPM = 100
 
 # Function to determine if heart rate is healthy or not
 def determine_heart_cond(age, heartType, BPM):
+    age=int(age)
     if (heartType == "Resting"):
         if (age >= 10):
             if (BPM  >= 60 and BPM <= 100): 
@@ -89,10 +90,10 @@ def advice(healthy):
     else:
         print("\nYour heart rate is abnormal for your age.\nPlease continue recording data and consult a medical professional")
 
-# Test heart rate and provide advice
-healthy = determine_heart_cond(age, heartType, BPM)
-advice(healthy)
+# # Test heart rate and provide advice
+# healthy = determine_heart_cond(age, heartType, BPM)
+# advice(healthy)
 
-# Inform user that data has been recorded
-print("\nYour data has been recorded.")
+# # Inform user that data has been recorded
+# print("\nYour data has been recorded.")
 

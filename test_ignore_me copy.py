@@ -1,6 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 from GUI_3p import BPMRecorderApp
+import BPM_Monitor
 
 class ImageSwitcherApp:
     def __init__(self, master):
@@ -11,8 +12,7 @@ class ImageSwitcherApp:
         self.images = [
             Image.open("1.png"), 
             Image.open("3.png"), 
-            Image.open("background.png"), 
-            Image.open("2.png")
+            Image.open("5.png")
         ]
         self.image_labels = []
 
@@ -87,6 +87,16 @@ class ImageSwitcherApp:
                 self.age_entry.place_forget()
                 self.type_menu.place_forget()
 
+            # Print debug statement to terminal when switching to the fourth page
+            print("Current image index after:", self.current_image_index)  # Debug statement
+            if self.current_image_index == 2:  # Change the condition here
+                newBPM = self.bpmApp.getBPM()
+                # Print collected data
+                print("Collected data:")
+                print("Age:", self.data["age"])
+                print("Type:", self.data["type"])
+                BPM_Monitor.determine_heart_cond(self.data["age"], self.data["type"], newBPM)
+
         else:
             # Reset current image index to cycle through images again
             self.current_image_index = 0
@@ -96,13 +106,7 @@ class ImageSwitcherApp:
             self.current_image_label = self.image_labels[self.current_image_index]
             self.current_image_label.pack()
 
-            # Print debug statement to terminal when switching to the fourth page
-            print("Current image index after:", self.current_image_index)  # Debug statement
-            if self.current_image_index == 0:  # Change the condition here
-                # Print collected data
-                print("Collected data:")
-                print("Age:", self.data["age"])
-                print("Type:", self.data["type"])
+
 
 def main():
     root = tk.Tk()
