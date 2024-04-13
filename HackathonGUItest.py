@@ -6,12 +6,12 @@ class RoundButton(tk.Canvas):
         super().__init__(master, **kwargs)
         self.config(width=120, height=120, highlightthickness=0, bd=0)
         self.bind('<Button-1>', self.on_click)
-        self.bind('<spacebar>', self.on_click)
+        self.bind('<space>', self.on_click)
 
         self.counter = 0
 
         # Load and display heart icon
-        self.heart_img = Image.open("C:\Python Programs\heart.jpg")
+        self.heart_img = Image.open("heart.jpg")
         self.heart_img = self.heart_img.resize((200, 200), Image.ANTIALIAS)
         self.heart_icon = ImageTk.PhotoImage(self.heart_img)
         self.create_image(60, 60, image=self.heart_icon)
@@ -30,7 +30,7 @@ class App(tk.Tk):
         self.geometry("500x400")
 
         # Add background image
-        self.background_img = Image.open(r"C:\Python Programs\background.png")
+        self.background_img = Image.open("background.png")
         self.background_img = self.background_img.resize((480, 800), Image.ANTIALIAS)
         self.background_photo = ImageTk.PhotoImage(self.background_img)
         self.background_label = tk.Label(self, image=self.background_photo)
