@@ -1,3 +1,5 @@
+import random
+
 TOTAL_TIME_S = 20
 END_NULL_TIME_S = 1
 DURATION_TIME_S = 15
@@ -21,19 +23,21 @@ def filter(intervals):
     
     return new_intervals
 
-def calculateBPS(intervals):
+def calculateBPM(intervals):
     total_time = sum(intervals)
     beats = len(intervals)
-    seconds_to_min = 60/DURATION_TIME_S
-    BPS = beats/total_time*seconds_to_min
-    return BPS
+    BPS = beats/total_time*60
+    return round(BPS)
 
-# Test Data
+#  Test Data
 # test_data = []
-# for i in range(600):
-#     test_data.append(0.9)
+# for i in range(100):
+#     test_data.append(random.randrange(900, 1100)/1000.0)
+# # print(test_data)
 
 # filtered_data = filter(test_data)
+# print(sum(filtered_data))
+# print(filtered_data)
 
-# BPS = calculateBPS(filtered_data)
+# BPS = calculateBPM(filtered_data)
 # print(BPS)

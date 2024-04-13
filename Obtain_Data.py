@@ -24,9 +24,11 @@ def on_key_press(event):
         print(f"Elapsed time: {elapsed_time:.2f} seconds")
         print(f"Total Time: {time.time()-begin_time:.2f} seconds")
 
+        
+
 def display_array():
     filtered_data = Manage_Data.filter(intervals)
-    BPS = Manage_Data.calculateBPS(filtered_data)
+    BPS = Manage_Data.calculateBPM(filtered_data)
     print(BPS)
 
 # Create the root window
