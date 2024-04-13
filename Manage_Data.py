@@ -1,4 +1,4 @@
-import random
+# import random
 
 TOTAL_TIME_S = 20
 END_NULL_TIME_S = 1
