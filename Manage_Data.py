@@ -1,24 +1,36 @@
 import random
 
-TOTAL_TIME_S = 20
+START_NULL_TIME_S = 3
 END_NULL_TIME_S = 1
-DURATION_TIME_S = 15
+TOTAL_TIME = 20
+duration_time = TOTAL_TIME-END_NULL_TIME_S-START_NULL_TIME_S
+
+def get_start_null_time():
+    return START_NULL_TIME_S
+
+def get_end_null_time():
+    return END_NULL_TIME_S
+
+def get_read_duration_null_time():
+    return duration_time
+
+def get_total_time():
+    return TOTAL_TIME
 
 def filter(intervals):
     new_intervals = []
 
-    if sum(intervals) < TOTAL_TIME_S:
+    if sum(intervals) < duration_time:
         print('Total Time is not long enough!\n Total Time: {0:0.2f}'.format(total_time))
         return
  
     total_time = 0
 
-    for i in range(len(intervals)-1, 0, -1):
-        time = intervals[i]
+    for time in intervals:
         total_time += time
-        if total_time > END_NULL_TIME_S and total_time < (END_NULL_TIME_S + DURATION_TIME_S):
+        if total_time > START_NULL_TIME_S and total_time < (START_NULL_TIME_S + duration_time):
             new_intervals.append(time)
-        elif total_time > (END_NULL_TIME_S + DURATION_TIME_S):
+        elif total_time > (START_NULL_TIME_S + duration_time):
             break
     
     return new_intervals
