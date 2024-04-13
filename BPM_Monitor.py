@@ -26,7 +26,7 @@ def determine_heart_cond(age, heartType, BPM):
     age=int(age)
     if (heartType == "Resting"):
         if (age >= 10):
-            if (BPM  >= 60 and BPM <= 100): 
+            if (BPM  >= 50 and BPM <= 100): 
                 healthy = True
             else:
                 healthy = False
