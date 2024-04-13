@@ -2,9 +2,25 @@ import tkinter as tk
 from tkinter import PhotoImage, Label
 from PIL import ImageTk, Image
 import time
+import Manage_Data
+
+first_click = True
+
+def update_screen_to_record():
+    return
+
+def count_down(time):
+    print(time)
+    if time > 0:
+        root.after(1000, count_down, time-1)
 
 def on_click(event):
-    global start_time
+    global start_time, first_click
+
+    if first_click:
+        first_click = False
+        root.after(Manage_Data.get_start_null_time()*1000, update_screen_to_record)
+        count_down(5)
 
     # Calculate elapsed time since last click
     end_time = time.time()
