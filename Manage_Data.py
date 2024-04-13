@@ -3,7 +3,7 @@ import random
 START_NULL_TIME_S = 3
 END_NULL_TIME_S = 1
 TOTAL_TIME = 18
-duration_time = TOTAL_TIME-END_NULL_TIME_S-START_NULL_TIME_S
+duration_time = TOTAL_TIME-END_NULL_TIME_S-START_NULL_TIME_S - 1
 
 def get_start_null_time():
     return START_NULL_TIME_S
