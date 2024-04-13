@@ -8,7 +8,7 @@ def filter(intervals):
     if sum(intervals) < TOTAL_TIME_S:
         print('Total Time is not long enough!\n Total Time: {0:0.2f}'.format(total_time))
         return
-
+ 
     total_time = 0
 
     for i in range(len(intervals)-1, 0, -1):
