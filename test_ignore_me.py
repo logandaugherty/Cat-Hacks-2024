@@ -10,8 +10,8 @@ class ImageSwitcherApp:
         self.images = [
             Image.open("1.png"), 
             Image.open("3.png"), 
-            Image.open("background.png"), 
-            Image.open("2.png")
+            Image.open("4.png"), 
+            Image.open("5.png")
         ]
         self.image_labels = []
 
