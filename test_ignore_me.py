@@ -59,14 +59,10 @@ class ImageSwitcherApp:
 
             # Show entry widgets only on the second image
             if self.current_image_index == 1:
-                self.age_label.place(x=50, y=400)
-                self.age_entry.place(x=150, y=400)
-                self.gender_label.place(x=50, y=430)
-                self.gender_entry.place(x=150, y=430)
+                self.age_entry.place(x=50, y=220)
+                self.gender_entry.place(x=220, y=220)
             else:  # Hide entry widgets on other images
-                self.age_label.place_forget()
                 self.age_entry.place_forget()
-                self.gender_label.place_forget()
                 self.gender_entry.place_forget()
         else:
             # Reset current image index to cycle through images again
@@ -80,7 +76,6 @@ class ImageSwitcherApp:
             # Print debug statement to terminal when switching to the fourth page
             print("Current image index after:", self.current_image_index)  # Debug statement
             if self.current_image_index == 0:  # Change the condition here
-                print("Switched to the fourth page")
                 # Print collected data
                 print("Collected data:")
                 print("Age:", self.data["age"])
