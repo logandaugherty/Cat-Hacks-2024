@@ -1,8 +1,8 @@
 import random
 
-START_NULL_TIME_S = 1
+START_NULL_TIME_S = 3
 END_NULL_TIME_S = 1
-TOTAL_TIME = 3
+TOTAL_TIME = 18
 duration_time = TOTAL_TIME-END_NULL_TIME_S-START_NULL_TIME_S
 
 def get_start_null_time():
@@ -21,8 +21,11 @@ def filter(intervals):
     new_intervals = []
     total_time = 0
 
-    for time in intervals:
+    for i in range(len(intervals)):
+        time = intervals[i]
         total_time += time
+    
+    print('Total Time: {0:0.2f}'.format(total_time))
 
     if total_time < duration_time:
         print('Total Time is not long enough!\n Total Time: {0:0.2f}'.format(total_time))
@@ -32,9 +35,9 @@ def filter(intervals):
 
     for time in intervals:
         total_time += time
-        if total_time > START_NULL_TIME_S and total_time < (START_NULL_TIME_S + duration_time):
+        if total_time > END_NULL_TIME_S and total_time < (END_NULL_TIME_S + duration_time):
             new_intervals.append(time)
-        elif total_time > (START_NULL_TIME_S + duration_time):
+        elif total_time > (END_NULL_TIME_S + duration_time):
             break
     
     return new_intervals
