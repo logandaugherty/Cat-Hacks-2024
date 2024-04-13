@@ -1,4 +1,4 @@
-# import random
+import random
 
 TOTAL_TIME_S = 20
 END_NULL_TIME_S = 1
@@ -30,14 +30,14 @@ def calculateBPM(intervals):
     return round(BPS)
 
 #  Test Data
-# test_data = []
-# for i in range(100):
-#     test_data.append(random.randrange(900, 1100)/1000.0)
-# # print(test_data)
+test_data = []
+for i in range(100):
+    test_data.append(random.randrange(900, 1100)/1000.0)
+# print(test_data)
 
-# filtered_data = filter(test_data)
-# print(sum(filtered_data))
-# print(filtered_data)
+filtered_data = filter(test_data)
+print(sum(filtered_data))
+print(filtered_data)
 
-# BPS = calculateBPM(filtered_data)
-# print(BPS)
+BPS = calculateBPM(filtered_data)
+print(BPS)
